@@ -24,38 +24,40 @@
       href="https://fonts.googleapis.com/css2?family=Lumanosimo&family=Megrim&display=swap"
       rel="stylesheet"
     />
+    <style>
+      .typewrite > .wrap {
+        color: black;
+        border-right: 0.08em solid black;
+      }
+    </style>
   </head>
   <body>
     <div id="cursor"></div>
     <div id="main">
       <div id="page1">
         <video id="bg-video" autoplay muted loop loading="lazy">
-          <source
-            src="./assets/production_id_4990233 (1080p) (1).mp4"
-            type="video/mp4"
-          />
+          <source src="/assets/background.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         <h4>JOIN</h4>
         <h2>THE</h2>
         <h3>CULT</h3>
       </div>
-
       <div id="page2">
         <h1 style="text-align: center">
           <a
             class="typewrite"
             data-period="2000"
-            data-type='[ "Surrender to the Truth, Find Liberation in Obedience.","Through Devotion, We Transcend the Ordinary and Become Eternal.", "Join the Circle of the Chosen, Forge Your Destiny Beyond Limits."]'
+            data-type='["Surrender to the Truth, Find Liberation in Obedience.", "Through Devotion, We Transcend the Ordinary and Become Eternal.", "Join the Circle of the Chosen, Forge Your Destiny Beyond Limits."]'
           >
             <span class="wrap"></span>
           </a>
         </h1>
         <div id="page2-img">
-          <img src="./assets/monster-pack/dragon.png" alt="" />
-          <img src="./assets/monster-pack/siren.png" alt="" />
-          <img src="./assets/monster-pack/unicorn.png" alt="" />
-          <img src="./assets/monster-pack/troll.png" alt="" />
+          <img src="./assets/monster-pack/dragon.webp" alt="" />
+          <img src="./assets/monster-pack/siren.webp" alt="" />
+          <img src="./assets/monster-pack/unicorn.webp" alt="" />
+          <img src="./assets/monster-pack/troll.webp" alt="" />
         </div>
       </div>
       <div id="page3">
@@ -84,11 +86,10 @@
           </div>
         </div>
       </div>
-
       <div id="page4">
         <div id="page4-image">
-          <img src="./assets/image 1.png" alt="" />
-          <img src="./assets/image 26.png" alt="" />
+          <img src="./assets/image-1.webp" alt="" />
+          <img src="./assets/image-26.webp" alt="" />
         </div>
         <button>JOIN NOW</button>
       </div>
@@ -97,7 +98,7 @@
           <h2>About Us</h2>
           <p>
             We are the seekers of truth, the followers of the unseen, and the
-            believers in the extraordinary. Cultcon is not just an organization;
+            believers in the extraordinary. Cultcon is not just a community;
             it's a journey towards liberation, transcendence, and eternal
             existence. Our devotion knows no bounds, and our unwavering
             commitment to the path sets us apart from the ordinary world.
@@ -105,7 +106,7 @@
         </div>
         <div class="marquee">
           <div class="track">
-            <div class="content" style="font-weight: bold">
+            <div class="content">
               &nbsp;JOIN THE CULT JOIN THE CULT JOIN THE CULT JOIN THE CULT JOIN
               THE CULT
             </div>
@@ -114,7 +115,7 @@
       </div>
       <footer>
         <div id="footer-div">
-          <p>© 2023 Cultcon all rights reserved</p>
+          <p>© 2023 Cultcon All Rights Reserved</p>
         </div>
       </footer>
     </div>
@@ -130,8 +131,184 @@
       integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
+      \
     ></script>
-    <script src="./cult.js"></script>
-    <script src="./typewriter.js"></script>
+    <script>
+      // Mouse interaction and scroll animation script
+      var cursor = document.querySelector("#cursor");
+      var main = document.querySelector("#main");
+      main.addEventListener("mousemove", function (dets) {
+        cursor.style.left = dets.x + "px";
+        cursor.style.top = dets.y + "px";
+      });
+      if (window.innerWidth > 767) {
+        // Locomotive Scroll initialization
+        function init() {
+          gsap.registerPlugin(ScrollTrigger);
+          const locoScroll = new LocomotiveScroll({
+            el: document.querySelector("#main"),
+            smooth: true,
+            tablet: { smooth: true },
+            smartphone: {
+              smooth: false,
+            },
+          });
+          locoScroll.on("scroll", ScrollTrigger.update);
+
+          ScrollTrigger.scrollerProxy("#main", {
+            scrollTop(value) {
+              return arguments.length
+                ? locoScroll.scrollTo(value, 0, 0)
+                : locoScroll.scroll.instance.scroll.y;
+            },
+            getBoundingClientRect() {
+              return {
+                top: 0,
+                left: 0,
+                width: window.innerWidth,
+                height: window.innerHeight,
+              };
+            },
+          });
+          ScrollTrigger.addEventListener("refresh", () => locoScroll.update());
+          ScrollTrigger.refresh();
+        }
+
+        init();
+
+        // Scroll animations using GSAP
+        var tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: "#page1 h2",
+            scroller: "#main",
+            start: "top 60%",
+            end: "top 0",
+            scrub: 2,
+          },
+        });
+        tl.to(
+          "#page1 h4",
+          {
+            x: -150,
+          },
+          "anim"
+        );
+        tl.to(
+          "#page1 h3",
+          {
+            x: 150,
+          },
+          "anim"
+        );
+
+        gsap.to("#page2", {
+          backgroundColor: "white",
+          opacity: 1,
+          duration: 4,
+          scrollTrigger: {
+            trigger: "#page1",
+            scroller: "#main",
+            markers: false,
+            start: "top -70%",
+            end: "top -100%",
+            scrub: 3,
+          },
+        });
+
+        gsap.to("#page3", {
+          backgroundColor: "black",
+          scrollTrigger: {
+            trigger: "#page1",
+            scroller: "#main",
+            start: "top -150%",
+            end: "top -200%",
+            scrub: 3,
+          },
+        });
+
+        gsap.to("#page5 h2", {
+          y: 80,
+          duration: 3,
+          scrollTrigger: {
+            trigger: "#page5 h2",
+            scroller: "#main",
+            start: "top -380%",
+            end: "top -410%",
+            scrub: 3,
+          },
+        });
+
+        gsap.to("#page5", {
+          backgroundColor: "white",
+          scrollTrigger: {
+            trigger: "#page1",
+            scroller: "#main",
+            start: "top -360%",
+            end: "top -370%",
+            scrub: 4,
+          },
+        });
+      }
+      // Typewriter effect script
+      var TxtType = function (el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = "";
+        this.tick();
+        this.isDeleting = false;
+      };
+
+      TxtType.prototype.tick = function () {
+        var i = this.loopNum % this.toRotate.length;
+        var fullTxt = this.toRotate[i];
+
+        if (this.isDeleting) {
+          this.txt = fullTxt.substring(0, this.txt.length - 1);
+        } else {
+          this.txt = fullTxt.substring(0, this.txt.length + 1);
+        }
+
+        this.el.innerHTML = '<span class="wrap">' + this.txt + "</span>";
+
+        var that = this;
+        var delta = 200 - Math.random() * 100;
+
+        if (this.isDeleting) {
+          delta /= 2;
+        }
+
+        if (!this.isDeleting && this.txt === fullTxt) {
+          delta = this.period;
+          this.isDeleting = true;
+        } else if (this.isDeleting && this.txt === "") {
+          this.isDeleting = false;
+          this.loopNum++;
+          delta = 500;
+        }
+
+        setTimeout(function () {
+          that.tick();
+        }, delta);
+      };
+
+      window.onload = function () {
+        var elements = document.getElementsByClassName("typewrite");
+        for (var i = 0; i < elements.length; i++) {
+          var toRotate = elements[i].getAttribute("data-type");
+          var period = elements[i].getAttribute("data-period");
+          if (toRotate) {
+            new TxtType(elements[i], JSON.parse(toRotate), period);
+          }
+        }
+        // INJECT CSS
+        var css = document.createElement("style");
+        css.type = "text/css";
+        css.innerHTML =
+          ".typewrite > .wrap { color: black; border-right: 0.08em solid black }"; // Set text color to black
+        document.body.appendChild(css);
+      };
+    </script>
   </body>
 </html>
