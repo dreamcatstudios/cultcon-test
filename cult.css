@@ -41,6 +41,10 @@ body {
   animation: marquee-page3 15s linear infinite;
 }
 
+.image-filter {
+  filter: grayscale(100%);
+}
+
 @keyframes marquee-page3-right {
   from {
     transform: translateX(-50%); /* Start from the right edge */
@@ -743,17 +747,18 @@ footer {
     border: 1px solid white;
     border-radius: 30px;
     align-self: center;
-    color: rgba(255, 255, 0, 0.498);
+    color: rgba(255, 255, 255, 1);
     font-size: 3vw;
     padding: 2%;
     font-weight: 900;
     background-color: rgba(3, 3, 3, 0.591);
-    box-shadow: 0px 0px 70px rgba(219, 205, 13, 0.454);
-    transition: all ease 0.3s;
+    box-shadow: 0px 0px 70px rgba(255, 255, 255, 0.454);
+    transition: all ease-out 0.15s;
   }
 
   #page4 button:hover {
-    box-shadow: 0px 0px 500px rgba(219, 205, 13, 0.658);
+    /* box-shadow: 0px 0px 500px rgba(219, 205, 13, 0.658); */
+    box-shadow: 0px 0px 500px rgba(255, 255, 255, 0.658);
   }
 
   #page5 {
